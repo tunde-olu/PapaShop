@@ -1,4 +1,4 @@
-const products = [
+const products: Array<IProduct> = [
 	{
 		_id: '1',
 		name: 'Airpods Wireless Bluetooth Headphones',

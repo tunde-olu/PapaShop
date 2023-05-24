@@ -1,14 +1,18 @@
-'use client';
-
 import Rating from '@/app/components/Products/Rating';
 import Link from 'next/link';
 import products from '@/mock-data/products';
-import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { parseCurrency } from '@/utils';
+import { ImBlocked } from 'react-icons/im';
 
-const ProductPage = () => {
-	const { productId } = useParams();
+interface Props {
+	params: {
+		productId: string;
+	};
+}
+
+const ProductPage = ({ params }: Props) => {
+	const { productId } = params;
 	const product = products.find((product) => product._id === productId);
 
 	const isProductInStock = product!.countInStock > 1;
@@ -52,7 +56,11 @@ const ProductPage = () => {
 							className='uppercase bg-black text-white border text-sm text-center py-2 w-full disabled:bg-gray-600 disabled:cursor-not-allowed'
 							disabled={!isProductInStock}
 						>
-							Add to Cart
+							{isProductInStock ? (
+								'Add to Cart'
+							) : (
+								<ImBlocked color='#c04a3dee' className='mx-auto' />
+							)}
 						</button>
 					</div>
 				</div>

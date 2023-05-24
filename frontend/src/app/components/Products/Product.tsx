@@ -10,7 +10,7 @@ interface Props {
 const Product = ({ product }: Props) => {
 	return (
 		<Link
-			href={`/product/${product._id}`}
+			href={`/products/${product._id}`}
 			className=' p-3 border bg-slate-50 rounded-md hover:scale-105 transition-all duration-500 mt-5 shadow-sm hover:shadow-md'
 		>
 			<div className='flex flex-col gap-4 '>
