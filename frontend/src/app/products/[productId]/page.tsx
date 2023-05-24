@@ -1,9 +1,9 @@
 import Rating from '@/app/components/Products/Rating';
 import Link from 'next/link';
-import products from '@/mock-data/products';
 import Image from 'next/image';
 import { parseCurrency } from '@/utils';
 import { ImBlocked } from 'react-icons/im';
+import axios from 'axios';
 
 interface Props {
 	params: {
@@ -11,11 +11,18 @@ interface Props {
 	};
 }
 
-const ProductPage = ({ params }: Props) => {
-	const { productId } = params;
-	const product = products.find((product) => product._id === productId);
+const fetchProduct = async (productId: string) => {
+	// TODO: fix URL
+	const data = await axios.get(`http://localhost:8000/api/products/${productId}`);
+	return data;
+};
 
-	const isProductInStock = product!.countInStock > 1;
+const ProductPage = async ({ params }: Props) => {
+	const { productId } = params;
+
+	const { data: product } = await fetchProduct(productId);
+
+	const isProductInStock = product?.countInStock > 1;
 
 	return (
 		<section className='py-8'>

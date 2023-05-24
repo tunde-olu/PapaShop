@@ -1,0 +1,11 @@
+{
+	"extends": "@tsconfig/node16/tsconfig.json",
+	"compilerOptions": {
+		"allowJs": true,
+		"rootDir": "backend/src",
+		"outDir": "backend/build",
+		"module": "ES6"
+	},
+	"include": ["backend/src/**/*"],
+	"exclude": ["frontend", "node_modules"]
+}
