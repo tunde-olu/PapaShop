@@ -20,7 +20,9 @@ const fetchProduct = async (productId: string) => {
 const ProductPage = async ({ params }: Props) => {
 	const { productId } = params;
 
-	const { data: product } = await fetchProduct(productId);
+	const {
+		data: { product },
+	} = await fetchProduct(productId);
 
 	const isProductInStock = product?.countInStock > 1;
 
@@ -66,7 +68,7 @@ const ProductPage = async ({ params }: Props) => {
 							{isProductInStock ? (
 								'Add to Cart'
 							) : (
-								<ImBlocked color='#c04a3dee' className='mx-auto' />
+								<ImBlocked color='#E2126C' size={18} className='mx-auto' />
 							)}
 						</button>
 					</div>

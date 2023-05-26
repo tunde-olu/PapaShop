@@ -1,5 +1,8 @@
+import { Suspense } from 'react';
 import Product from './components/Products/Product';
 import axios from 'axios';
+
+export const revalidate = 0;
 
 const fetchProduct = async () => {
 	// TODO: fix URL
@@ -8,7 +11,9 @@ const fetchProduct = async () => {
 };
 
 const Home = async () => {
-	const { data: products } = await fetchProduct();
+	const {
+		data: { products },
+	} = await fetchProduct();
 
 	return (
 		<div className='bg-gray-100'>
@@ -18,7 +23,11 @@ const Home = async () => {
 					<div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 auto-rows-fr mx-auto '>
 						{products.length > 1 &&
 							products.map((product: IProduct) => {
-								return <Product product={product} key={product._id} />;
+								return (
+									<Suspense fallback={<p>Loading...</p>}>
+										<Product product={product} key={product._id} />
+									</Suspense>
+								);
 							})}
 					</div>
 				</div>
